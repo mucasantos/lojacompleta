@@ -1,0 +1,299 @@
+{
+  "project_info": {
+    "project_number": "266724040409",
+    "firebase_url": "https://myuber-39969.firebaseio.com",
+    "project_id": "myuber-39969",
+    "storage_bucket": "myuber-39969.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:e605899172f00bab4568c8",
+        "android_client_info": {
+          "package_name": "br.com.coopshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:9e1369379b0843764568c8",
+        "android_client_info": {
+          "package_name": "com.agendou.owner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:2e8c76eb7c841d244568c8",
+        "android_client_info": {
+          "package_name": "com.barber_app.barber_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:eff87774306831114568c8",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_app_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:c14d3c66e410e4d44568c8",
+        "android_client_info": {
+          "package_name": "com.mucasantos.lojacompleta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:6aa53c05df5f1dcb4568c8",
+        "android_client_info": {
+          "package_name": "com.samuelsantos.mychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:226ec22339ace3814568c8",
+        "android_client_info": {
+          "package_name": "com.samuelsantos.myuber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266724040409:android:09d53e7b02011c9d4568c8",
+        "android_client_info": {
+          "package_name": "com.samuelsantos.samuca_zapzap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iijKxALjtP2e7PG6j4qxtsEbw2Ald50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266724040409-8bqa06fuc8785j1uhehvl7b0bmcp315a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266724040409-9lrjo7p5rdr043ce4hdd840vk1u8gel2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuelsantos.samucaZapzap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

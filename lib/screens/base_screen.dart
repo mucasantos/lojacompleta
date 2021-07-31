@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojacompleta/models/page_manager.dart';
 import 'package:lojacompleta/screens/home/homescreen.dart';
 import 'package:lojacompleta/screens/login/login_screen.dart';
+import 'package:lojacompleta/screens/products/products_screen.dart';
 import 'package:lojacompleta/widgets/custom_drawer/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -20,15 +21,10 @@ class BaseScreen extends StatelessWidget {
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
-              title: const Text('Home2'),
+              title: const Text('Home'),
             ),
           ),
-          Scaffold(
-            drawer: CustomDrawer(),
-            appBar: AppBar(
-              title: const Text('Home3'),
-            ),
-          ),
+          ProductsScreen(),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lojacompleta/helpers/validators.dart';
 import 'package:lojacompleta/models/user.dart';
-import 'package:lojacompleta/widgets/custom_drawer/form_container.dart';
+import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/widgets/signup_botton.dart';
 import 'package:lojacompleta/widgets/stagger_animation_button.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -39,15 +40,16 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "images/login_back.jpg",
-                ),
-                fit: BoxFit.cover)),
-        child: ListView(
+        body: Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                "images/login_back.jpg",
+              ),
+              fit: BoxFit.cover)),
+      child: Consumer<UserManager>(builder: (_, usermanager, __) {
+        return ListView(
           padding: const EdgeInsets.all(0),
           shrinkWrap: true,
           children: [
@@ -80,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   BorderSide(color: Colors.white24, width: 1),
                             )),
                             child: TextFormField(
+                              enabled: !usermanager.loading,
                               style: TextStyle(color: Colors.white),
                               decoration: const InputDecoration(
                                 hintText: 'E-mail',
@@ -114,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   BorderSide(color: Colors.white24, width: 1),
                             )),
                             child: TextFormField(
+                              enabled: !usermanager.loading,
                               style: TextStyle(color: Colors.white),
                               decoration: const InputDecoration(
                                 hintText: 'Senha',
@@ -157,8 +161,8 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ],
-        ),
-      ),
-    );
+        );
+      }),
+    ));
   }
 }

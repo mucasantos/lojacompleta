@@ -6,7 +6,9 @@ class SignUpButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 160.0),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushReplacementNamed("/signup");
+        },
         child: Text(
           "Não possui uma conta? Cadastre-se",
           overflow: TextOverflow.ellipsis,

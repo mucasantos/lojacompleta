@@ -40,7 +40,8 @@ class StaggerAnimationButton extends StatelessWidget {
             context.read<UserManager>().signIn(
                 user: user,
                 onSuccess: () {
-                  //TODO Fechar tela de login
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed("/base");
                 },
                 onFail: (message) {
                   controller.reverse();

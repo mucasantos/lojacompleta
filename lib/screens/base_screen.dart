@@ -15,7 +15,7 @@ class BaseScreen extends StatelessWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomeScreen(),
+          //HomeScreen(),
           //LoginScreen(),
           Scaffold(
             drawer: CustomDrawer(),

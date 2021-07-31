@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/screens/base_screen.dart';
 import 'package:lojacompleta/screens/login/login_screen.dart';
+import 'package:lojacompleta/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      lazy: false,
       create: (_) => UserManager(),
       child: MaterialApp(
         title: 'Loja do Samuca',
@@ -21,12 +22,27 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Poppins',
         ).copyWith(
-          primaryColor: const Color(0xff7FB4E2),
-          scaffoldBackgroundColor: const Color(0xff7FB4E2),
+          primaryColor: const Color(0xFF66CCB5),
+          scaffoldBackgroundColor: const Color(0xFF66CCB5),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(elevation: 0),
         ),
-        home: LoginScreen(),
+        initialRoute: '/base',
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/login':
+              return MaterialPageRoute(builder: (_) => LoginScreen());
+              break;
+            case '/base':
+              return MaterialPageRoute(builder: (_) => BaseScreen());
+              break;
+            case '/signup':
+              return MaterialPageRoute(builder: (_) => SignUpScreen());
+              break;
+            default:
+              return MaterialPageRoute(builder: (_) => BaseScreen());
+          }
+        },
       ),
     );
   }

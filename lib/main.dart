@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lojacompleta/models/product.model.dart';
 import 'package:lojacompleta/models/product_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/screens/base_screen.dart';
 import 'package:lojacompleta/screens/login/login_screen.dart';
+import 'package:lojacompleta/screens/product/product_screen.dart';
 import 'package:lojacompleta/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +41,10 @@ class MyApp extends StatelessWidget {
         initialRoute: '/base',
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case '/product':
+              return MaterialPageRoute(
+                  builder: (_) => ProductScreen(settings.arguments as Product));
+              break;
             case '/login':
               return MaterialPageRoute(builder: (_) => LoginScreen());
               break;

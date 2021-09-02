@@ -33,6 +33,7 @@ dependencies:
   firebase_storage: ^3.1.5
   provider: ^4.1.2
   carousel_pro: ^1.0.0
+  appsflyer_sdk: ^6.2.4+4-nullsafety
 
 dev_dependencies:
   flutter_test:

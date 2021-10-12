@@ -4,9 +4,9 @@ class ItemSize {
     price = map['price'] as num;
     stock = map['stock'] as int;
   }
-  late String name;
-  late num price;
-  late int stock;
+  String name;
+  num price;
+  int stock;
 
   bool get hasStock => stock > 0;
 

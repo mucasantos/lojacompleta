@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
+  AnimationController _controller;
 
   @override
   void initState() {
@@ -16,13 +16,13 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
     _controller = AnimationController(
         vsync: this, duration: Duration(milliseconds: 2000));
-    _controller!.forward();
+    _controller.forward();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _controller!.dispose();
+    _controller.dispose();
     super.dispose();
   }
 

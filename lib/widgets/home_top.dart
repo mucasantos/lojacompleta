@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lojacompleta/models/user.dart';
 import 'package:lojacompleta/models/user_manager.dart';
 import 'package:provider/provider.dart';
 
 class HomeTop extends StatelessWidget {
-  final Animation<double>? containerGrow;
+  final Animation<double> containerGrow;
   HomeTop({
     @required this.containerGrow,
   });
@@ -24,8 +23,8 @@ class HomeTop extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.topCenter,
-            width: containerGrow!.value * 120,
-            height: containerGrow!.value * 120,
+            width: containerGrow.value * 120,
+            height: containerGrow.value * 120,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -36,7 +35,7 @@ class HomeTop extends StatelessWidget {
           Consumer<UserManager>(builder: (_, userManager, __) {
             if (userManager.user == null) return Container();
             return Text(
-              "Bem-vindo, ${userManager.user!.name}",
+              "Bem-vindo, ${userManager.user.name}",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,

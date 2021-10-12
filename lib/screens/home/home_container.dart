@@ -10,9 +10,9 @@ import 'package:lojacompleta/widgets/text_border.dart';
 
 // ignore: must_be_immutable
 class HomeContainer extends StatefulWidget {
-  final Map? onData;
-  final Future<bool> Function(String, Map)? logEvent;
-  final Map? deepLinkData;
+  final Map onData;
+  final Future<bool> Function(String, Map) logEvent;
+  final Map deepLinkData;
 
   HomeContainer({
     this.onData,
@@ -34,13 +34,13 @@ class _HomeContainerState extends State<HomeContainer> {
   };
 
   String _logEventResponse = "No event have been sent";
-  PayloadDeepLink? payloadLinkData;
-  Payload? conversionData;
-  AppsflyerSdk? _appsflyerSdk;
+  PayloadDeepLink payloadLinkData;
+  Payload conversionData;
+  AppsflyerSdk _appsflyerSdk;
 
-  Map? _deepLinkData;
+  Map _deepLinkData;
 
-  Map? _gcd;
+  Map _gcd;
 
   @override
   void initState() {
@@ -51,36 +51,36 @@ class _HomeContainerState extends State<HomeContainer> {
 
   void initAppsFlyer() async {
     _appsflyerSdk = AppsflyerSdk(appsFlyerOptions);
-    _appsflyerSdk!.initSdk(
+    _appsflyerSdk.initSdk(
         registerConversionDataCallback: true,
         registerOnAppOpenAttributionCallback: true,
         registerOnDeepLinkingCallback: true);
-    _appsflyerSdk!.onAppOpenAttribution((res) {
+    _appsflyerSdk.onAppOpenAttribution((res) {
       print("onAppOpenAttribution res: " + res.toString());
       setState(() {
         _deepLinkData = res;
       });
     });
-    _appsflyerSdk!.onInstallConversionData((res) {
+    _appsflyerSdk.onInstallConversionData((res) {
       // print("onInstallConversionData res: " + res.toString());
       setState(() {
         _gcd = res;
-        conversionData = Payload.fromJson(_gcd!['payload']);
+        conversionData = Payload.fromJson(_gcd['payload']);
       });
       print('bla');
-      print(_gcd!['payload']['install_time'].toString());
+      print(_gcd['payload']['install_time'].toString());
       print('depois');
 
-      print(conversionData!.afMessage);
+      print(conversionData.afMessage);
     });
-    _appsflyerSdk!.onDeepLinking((res) {
+    _appsflyerSdk.onDeepLinking((res) {
       print("onDeepLinking res: " + res.toString());
       setState(() {
         _deepLinkData = res;
-        payloadLinkData = PayloadDeepLink.fromJson(_deepLinkData!['payload']);
+        payloadLinkData = PayloadDeepLink.fromJson(_deepLinkData['payload']);
       });
 
-      if (payloadLinkData!.deepLink!.option!.contains('open_signup'))
+      if (payloadLinkData.deepLink.option.contains('open_signup'))
         Navigator.of(context).pushNamed('/signup');
       //final map = Utils.formatJson(res);
       //if (map.contains('open_signup')) {
@@ -88,15 +88,15 @@ class _HomeContainerState extends State<HomeContainer> {
       // }
     });
 
-    _appsflyerSdk!.onAppOpenAttribution((res) {
+    _appsflyerSdk.onAppOpenAttribution((res) {
       print("RESSSSS");
       print(res.toString());
 
       setState(() {
         _deepLinkData = res;
-        payloadLinkData = PayloadDeepLink.fromJson(_deepLinkData!['payload']);
+        payloadLinkData = PayloadDeepLink.fromJson(_deepLinkData['payload']);
       });
-      if (payloadLinkData!.deepLink!.option!.contains('open_signup'))
+      if (payloadLinkData.deepLink.option.contains('open_signup'))
         Navigator.of(context).pushNamed('/signup');
     });
   }
@@ -172,17 +172,17 @@ class _HomeContainerState extends State<HomeContainer> {
                     Column(
                       children: [
                         Text('Isso mesmo'),
-                        Text(payloadLinkData!.deepLink!.option ?? ' '),
-                        Text(payloadLinkData!.deepLink!.deepLinkValue ?? ''),
-                        Text(payloadLinkData!.deepLink!.mediaSource ?? ''),
+                        Text(payloadLinkData.deepLink.option ?? ' '),
+                        Text(payloadLinkData.deepLink.deepLinkValue ?? ''),
+                        Text(payloadLinkData.deepLink.mediaSource ?? ''),
                       ],
                     ),
                   if (conversionData != null)
                     Column(
                       children: [
-                        Text(conversionData!.afMessage ?? ' '),
-                        Text(conversionData!.afStatus ?? ''),
-                        Text(conversionData!.installTime ?? ''),
+                        Text(conversionData.afMessage ?? ' '),
+                        Text(conversionData.afStatus ?? ''),
+                        Text(conversionData.installTime ?? ''),
                       ],
                     ),
                   ElevatedButton(
@@ -193,7 +193,7 @@ class _HomeContainerState extends State<HomeContainer> {
                         Navigator.of(context).pushNamed('/signup');
                       }
 
-                      widget.logEvent!(eventName, eventValues).then((onValue) {
+                      widget.logEvent(eventName, eventValues).then((onValue) {
                         setState(() {
                           _logEventResponse = onValue.toString();
                         });

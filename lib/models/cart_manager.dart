@@ -8,7 +8,7 @@ import 'package:lojacompleta/models/user_manager.dart';
 class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
 
-  User? user;
+  User user;
 
   num productsPrice = 0.0;
 
@@ -23,7 +23,7 @@ class CartManager extends ChangeNotifier {
   }
 
   _loadCartItems() async {
-    final QuerySnapshot carSnap = await user!.cartReference.getDocuments();
+    final QuerySnapshot carSnap = await user.cartReference.getDocuments();
 
     items = carSnap.documents
         .map((doc) => CartProduct.fromDocument(doc)..addListener(_onItemUpdate))
@@ -38,7 +38,7 @@ class CartManager extends ChangeNotifier {
       final cartProduct = CartProduct.fromProduct(product);
       cartProduct.addListener(_onItemUpdate);
       items.add(cartProduct);
-      user!.cartReference
+      user.cartReference
           .add(cartProduct.toCartItemMap())
           .then((doc) => cartProduct.id = doc.documentID);
       _onItemUpdate();
@@ -64,14 +64,14 @@ class CartManager extends ChangeNotifier {
 
   void removeFromCart(CartProduct cartProduct) {
     items.removeWhere((product) => product.id == cartProduct.id);
-    user!.cartReference.document(cartProduct.id).delete();
+    user.cartReference.document(cartProduct.id).delete();
     cartProduct.removeListener(_onItemUpdate);
     notifyListeners();
   }
 
   void _updateCartProduct(CartProduct cartProduct) {
     if (cartProduct.id != null)
-      user!.cartReference
+      user.cartReference
           .document(cartProduct.id)
           .updateData(cartProduct.toCartItemMap());
   }

@@ -12,6 +12,7 @@ class CartTile extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: cartProduct,
       child: Card(
+        color: const Color(0xFF66CCB5),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -21,7 +22,7 @@ class CartTile extends StatelessWidget {
                 height: 80,
                 width: 80,
                 child: Image.network(
-                  cartProduct.product!.images.first,
+                  cartProduct.product.images.first,
                 ),
               ),
               Expanded(
@@ -30,7 +31,7 @@ class CartTile extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        cartProduct.product!.name,
+                        cartProduct.product.name,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17.0,
@@ -69,7 +70,7 @@ class CartTile extends StatelessWidget {
                   children: [
                     CustomIconButton(
                       iconData: Icons.add,
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.white,
                       onTap: cartProduct.increment,
                     ),
                     Text(
@@ -78,9 +79,8 @@ class CartTile extends StatelessWidget {
                     ),
                     CustomIconButton(
                       iconData: Icons.remove,
-                      color: cartProduct.quantity > 1
-                          ? Theme.of(context).primaryColor
-                          : Colors.red,
+                      color:
+                          cartProduct.quantity > 1 ? Colors.white : Colors.red,
                       onTap: cartProduct.decrement,
                     ),
                   ],

@@ -8,12 +8,23 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFF66CCB5),
         title: const Text('Carrinho'),
       ),
       body: Consumer<CartManager>(
         builder: (_, cartManager, __) {
+          if (cartManager.items.isEmpty)
+            return GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Center(
+                child: Image.asset(
+                  "images/empty-cart.gif",
+                  scale: 4,
+                ),
+              ),
+            );
           return ListView(
             children: [
               Column(

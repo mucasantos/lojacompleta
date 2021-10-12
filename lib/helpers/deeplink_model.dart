@@ -1,6 +1,6 @@
 class DeepLinkModel {
-  String? status;
-  PayloadDeepLink? payload;
+  String status;
+  PayloadDeepLink payload;
 
   DeepLinkModel({this.status, this.payload});
 
@@ -15,15 +15,15 @@ class DeepLinkModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.payload != null) {
-      data['payload'] = this.payload!.toJson();
+      data['payload'] = this.payload.toJson();
     }
     return data;
   }
 }
 
 class PayloadDeepLink {
-  DeepLink? deepLink;
-  String? status;
+  DeepLink deepLink;
+  String status;
 
   PayloadDeepLink({this.deepLink, this.status});
 
@@ -37,7 +37,7 @@ class PayloadDeepLink {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.deepLink != null) {
-      data['deepLink'] = this.deepLink!.toJson();
+      data['deepLink'] = this.deepLink.toJson();
     }
     data['status'] = this.status;
     return data;
@@ -45,12 +45,12 @@ class PayloadDeepLink {
 }
 
 class DeepLink {
-  int? amount;
-  String? mediaSource;
-  String? campaign;
-  String? deepLinkValue;
-  String? option;
-  bool? isDeferred;
+  int amount;
+  String mediaSource;
+  String campaign;
+  String deepLinkValue;
+  String option;
+  bool isDeferred;
 
   DeepLink(
       {this.amount,

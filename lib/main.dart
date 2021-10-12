@@ -1,7 +1,4 @@
-import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:lojacompleta/helpers/constants.dart';
-import 'package:lojacompleta/helpers/utils.dart';
 import 'package:lojacompleta/models/cart_manager.dart';
 import 'package:lojacompleta/models/product.model.dart';
 import 'package:lojacompleta/models/product_manager.dart';

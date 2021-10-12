@@ -13,14 +13,14 @@ class Product extends ChangeNotifier {
         .map((size) => ItemSize.fromMap(size as Map<String, dynamic>))
         .toList();
   }
-  String id;
-  String name;
-  String description;
-  List<String> images;
-  List<ItemSize> sizes;
-  ItemSize _selectedSize;
+  late String id;
+  late String name;
+  late String description;
+  late List<String> images;
+  late List<ItemSize> sizes;
+  late ItemSize? _selectedSize;
 
-  ItemSize get selectedSize => _selectedSize;
+  ItemSize get selectedSize => _selectedSize!;
   set selectedSize(ItemSize value) {
     _selectedSize = value;
     notifyListeners();
@@ -38,7 +38,7 @@ class Product extends ChangeNotifier {
     return totalStock > 0;
   }
 
-  ItemSize findSize(String sizeName) {
+  ItemSize? findSize(String sizeName) {
     try {
       return sizes.firstWhere((size) => size.name == sizeName);
     } catch (e) {

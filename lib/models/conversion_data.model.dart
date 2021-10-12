@@ -1,6 +1,6 @@
 class ConversionDataModel {
-  String status;
-  Payload payload;
+  late String? status;
+  late Payload? payload;
 
   ConversionDataModel({this.status, this.payload});
 
@@ -14,17 +14,17 @@ class ConversionDataModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.payload != null) {
-      data['payload'] = this.payload.toJson();
+      data['payload'] = this.payload!.toJson();
     }
     return data;
   }
 }
 
 class Payload {
-  String installTime;
-  String afStatus;
-  String afMessage;
-  bool isFirstLaunch;
+  late String? installTime;
+  late String? afStatus;
+  late String? afMessage;
+  late bool? isFirstLaunch;
 
   Payload(
       {this.installTime, this.afStatus, this.afMessage, this.isFirstLaunch});

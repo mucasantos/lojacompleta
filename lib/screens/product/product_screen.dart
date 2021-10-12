@@ -17,11 +17,12 @@ class ProductScreen extends StatelessWidget {
       value: product,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xFF66CCB5),
           title: Text(
             product.name,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFF66CCB5),
         body: ListView(
           children: [
             AspectRatio(
@@ -40,31 +41,72 @@ class ProductScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      product.name,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        "A partir de",
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                "A partir de",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ),
+                            Text(
+                              product.sizes.first.price.toString(),
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    Text(
-                      "R\$19.00",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: primaryColor,
-                      ),
+                        if (product.hasStock)
+                          Consumer2<UserManager, Product>(
+                            builder: (_, userManager, product, __) {
+                              return SizedBox(
+                                height: 44,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: primaryColor),
+                                  onPressed: product.selectedSize != null
+                                      ? () {
+                                          if (userManager.isLoggedIn) {
+                                            context
+                                                .read<CartManager>()
+                                                .addToCart(product);
+                                            Navigator.of(context)
+                                                .pushNamed('/cart');
+                                          } else {
+                                            Navigator.of(context)
+                                                .pushNamed('/login');
+                                          }
+                                        }
+                                      : null,
+                                  child: Text(
+                                    userManager.isLoggedIn
+                                        ? 'Adicionar ao carrinho'
+                                        : 'Entre para comprar',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, bottom: 8),
@@ -105,38 +147,6 @@ class ProductScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    if (product.hasStock)
-                      Consumer2<UserManager, Product>(
-                        builder: (_, userManager, product, __) {
-                          return SizedBox(
-                            height: 44,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: primaryColor),
-                              onPressed: product.selectedSize != null
-                                  ? () {
-                                      if (userManager.isLoggedIn) {
-                                        context
-                                            .read<CartManager>()
-                                            .addToCart(product);
-                                        Navigator.of(context)
-                                            .pushNamed('/cart');
-                                      } else {
-                                        Navigator.of(context)
-                                            .pushNamed('/login');
-                                      }
-                                    }
-                                  : null,
-                              child: Text(
-                                userManager.isLoggedIn
-                                    ? 'Adicionar ao carrinho'
-                                    : 'Entre para comprar',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          );
-                        },
-                      )
                   ],
                 ))
           ],

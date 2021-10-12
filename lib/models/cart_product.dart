@@ -5,12 +5,13 @@ import 'package:lojacompleta/models/product.model.dart';
 
 class CartProduct extends ChangeNotifier {
   CartProduct.fromProduct(this.product) {
-    productId = product.id;
+    productId = product!.id;
     quantity = 1;
-    size = product.selectedSize.name;
+    size = product!.selectedSize.name;
   }
 
   CartProduct.fromDocument(DocumentSnapshot document) {
+    id = document.documentID;
     productId = document.data['pid'] as String;
     quantity = document.data['quantity'] as int;
     size = document.data['size'] as String;
@@ -23,20 +24,25 @@ class CartProduct extends ChangeNotifier {
 
   final Firestore firestore = Firestore.instance;
 
-  String productId;
-  int quantity;
-  String size;
+  String? id;
+  String? productId;
+  late int quantity;
+  String? size;
 
-  Product product;
+  Product? product;
 
-  ItemSize get itemSize {
+  ItemSize? get itemSize {
     if (product == null) return null;
-    return product.findSize(size);
+    return product!.findSize(size!);
   }
 
   num get unitPrice {
     if (product == null) return 0;
     return itemSize?.price ?? 0;
+  }
+
+  num get totalPrice {
+    return unitPrice * quantity!;
   }
 
   Map<String, dynamic> toCartItemMap() {
@@ -59,5 +65,11 @@ class CartProduct extends ChangeNotifier {
   void decrement() {
     quantity--;
     notifyListeners();
+  }
+
+  bool get hasStock {
+    final size = itemSize;
+    if (size == null) return false;
+    return size.stock >= quantity!;
   }
 }

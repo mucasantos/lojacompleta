@@ -21,7 +21,7 @@ class CartTile extends StatelessWidget {
                 height: 80,
                 width: 80,
                 child: Image.network(
-                  cartProduct.product.images.first,
+                  cartProduct.product!.images.first,
                 ),
               ),
               Expanded(
@@ -30,7 +30,7 @@ class CartTile extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        cartProduct.product.name,
+                        cartProduct.product!.name,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17.0,
@@ -45,12 +45,21 @@ class CartTile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'R\$ ${cartProduct.unitPrice.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor),
-                      )
+                      Consumer<CartProduct>(builder: (_, cartProduct, __) {
+                        if (cartProduct.hasStock)
+                          return Text(
+                            'R\$ ${cartProduct.unitPrice.toStringAsFixed(2)}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).primaryColor),
+                          );
+                        else
+                          return Text('Sem estoque suficiente',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.red,
+                              ));
+                      })
                     ],
                   ),
                 ),
@@ -69,7 +78,9 @@ class CartTile extends StatelessWidget {
                     ),
                     CustomIconButton(
                       iconData: Icons.remove,
-                      color: Theme.of(context).primaryColor,
+                      color: cartProduct.quantity > 1
+                          ? Theme.of(context).primaryColor
+                          : Colors.red,
                       onTap: cartProduct.decrement,
                     ),
                   ],

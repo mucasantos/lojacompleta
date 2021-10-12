@@ -5,8 +5,10 @@ import 'package:lojacompleta/helpers/deeplink_model.dart';
 import 'package:lojacompleta/helpers/utils.dart';
 import 'package:lojacompleta/models/conversion_data.model.dart';
 import 'package:lojacompleta/models/page_manager.dart';
+import 'package:lojacompleta/models/user_manager.dart';
 
 import 'package:lojacompleta/screens/home/home_container.dart';
+import 'package:lojacompleta/screens/home/homescreen.dart';
 import 'package:lojacompleta/screens/products/products_screen.dart';
 import 'package:lojacompleta/widgets/custom_drawer/drawer.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +21,13 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   final PageController pageController = PageController();
 
-  AppsflyerSdk _appsflyerSdk;
+  AppsflyerSdk? _appsflyerSdk;
 
-  Map _deepLinkData;
+  late Map _deepLinkData;
 
-  Map _gcd;
+  late Map _gcd;
 
+  late UserManager userManager;
   @override
   void initState() {
     super.initState();
@@ -39,14 +42,16 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          //HomeScreen(),
+          // HomeScreen(),
           //LoginScreen(),
           Scaffold(
+              backgroundColor: const Color(0xFF66CCB5),
               drawer: CustomDrawer(),
               appBar: AppBar(
+                backgroundColor: const Color(0xFF66CCB5),
                 title: const Text('Home'),
               ),
-              body: HomeContainer(
+              body: HomeScreen(
                   // onData: _gcd,
                   // deepLinkData: _deepLinkData,
                   // logEvent: logEvent,
@@ -82,6 +87,7 @@ class _BaseScreenState extends State<BaseScreen> {
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
+              backgroundColor: const Color(0xFF66CCB5),
               title: const Text('Home4'),
             ),
           ),
@@ -89,8 +95,9 @@ class _BaseScreenState extends State<BaseScreen> {
       ),
     );
   }
-
-  Future<bool> logEvent(String eventName, Map eventValues) {
-    return _appsflyerSdk.logEvent(eventName, eventValues);
+/*
+  Future<bool> logEvent(String? eventName, Map? eventValues) {
+    return _appsflyerSdk!.logEvent(eventName, eventValues);
   }
+  */
 }

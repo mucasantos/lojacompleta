@@ -16,16 +16,16 @@ class UserManager extends ChangeNotifier {
 
   final Firestore firestore = Firestore.instance;
 
-  bool _loading = false;
+  late bool _loading = false;
   bool get loading => _loading;
   bool get isLoggedIn => user != null;
   Map get deepLinkData => _deepLinkData;
   Map get gcd => _gcd;
-  User user;
+  User? user;
 
-  AppsflyerSdk _appsflyerSdk;
-  Map _deepLinkData;
-  Map _gcd;
+  late AppsflyerSdk _appsflyerSdk;
+  late Map _deepLinkData;
+  late Map _gcd;
 
   //GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
@@ -63,16 +63,17 @@ class UserManager extends ChangeNotifier {
     });
   }
 
-  Future<void> signIn({User user, Function onFail, Function onSuccess}) async {
+  Future<void> signIn(
+      {User? user, Function? onFail, Function? onSuccess}) async {
     loading = true;
     try {
       final AuthResult result = await auth.signInWithEmailAndPassword(
-          email: user.email, password: user.password);
+          email: user!.email, password: user!.password);
 
       await _loadCurrentUser(firebaseUser: result.user);
-      onSuccess();
+      onSuccess!();
     } on PlatformException catch (e) {
-      onFail(getErrorString(e.code));
+      onFail!(getErrorString(e.code));
     }
 
     loading = false;
@@ -83,7 +84,7 @@ class UserManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _loadCurrentUser({FirebaseUser firebaseUser}) async {
+  Future<void> _loadCurrentUser({FirebaseUser? firebaseUser}) async {
     final FirebaseUser currentUser = firebaseUser ?? await auth.currentUser();
 
     if (currentUser != null) {
@@ -91,25 +92,26 @@ class UserManager extends ChangeNotifier {
           await firestore.collection('users').document(currentUser.uid).get();
 
       user = User.fromDocument(document: docUser);
-      print(user.name);
+      print(user!.name);
       notifyListeners();
     }
   }
 
-  Future<void> signUp({User user, Function onFail, Function onSuccess}) async {
+  Future<void> signUp(
+      {User? user, Function? onFail, Function? onSuccess}) async {
     loading = true;
     try {
       final AuthResult result = await auth.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
+          email: user!.email, password: user.password);
 
       user.id = result.user.uid;
       this.user = user;
 
       await user.saveData();
 
-      onSuccess();
+      onSuccess!();
     } on PlatformException catch (e) {
-      onFail(getErrorString(e.code));
+      onFail!(getErrorString(e.code));
     }
 
     loading = false;

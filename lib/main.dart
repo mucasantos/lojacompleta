@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           create: (_) => ProductManager(),
           lazy: false,
         ),
-        ProxyProvider<UserManager, CartManager>(
+        ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
           lazy: false,
           update: (_, userManager, cartManager) =>
@@ -52,14 +52,17 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         title: 'Loja do Samuca',
+        color: const Color(0xFF66CCB5),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Poppins',
         ).copyWith(
+          backgroundColor: const Color(0xFF66CCB5),
           primaryColor: const Color(0xFF66CCB5),
           scaffoldBackgroundColor: const Color(0xFF66CCB5),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(elevation: 0),
+          bottomAppBarColor: const Color(0xFF66CCB5),
         ),
         initialRoute: '/base',
         onGenerateRoute: (settings) {

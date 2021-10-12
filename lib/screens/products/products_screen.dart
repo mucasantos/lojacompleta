@@ -11,6 +11,7 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
+        backgroundColor: const Color(0xFF66CCB5),
         title: Consumer<ProductManager>(
           builder: (_, productManager, __) {
             if (productManager.search.isEmpty) {

@@ -10,7 +10,7 @@ class FormContainer extends StatefulWidget {
 
 class _FormContainerState extends State<FormContainer>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
   final TextEditingController passController = TextEditingController();
 
   final TextEditingController nameController = TextEditingController();
@@ -34,7 +34,7 @@ class _FormContainerState extends State<FormContainer>
   void dispose() {
     // TODO: implement dispose
 
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -64,7 +64,7 @@ class _FormContainerState extends State<FormContainer>
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
               validator: (email) {
-                if (!emailValid(email)) return "E-mail inválido";
+                if (!emailValid(email!)) return "E-mail inválido";
                 setState(() {
                   user.email = email;
                 });
@@ -98,7 +98,7 @@ class _FormContainerState extends State<FormContainer>
               obscureText: true,
               autocorrect: false,
               validator: (senha) {
-                if (senha.isEmpty || senha.length < 8) {
+                if (senha!.isEmpty || senha.length < 8) {
                   return "Senha inválida";
                 }
 
@@ -115,8 +115,8 @@ class _FormContainerState extends State<FormContainer>
           ),
           StaggerAnimationButton(
               user: user,
-              controller: _animationController.view,
-              formKey: formKey)
+              controller: _animationController,
+              formKey: formKey) //Antes era _animatorController.view
         ],
       ),
     );

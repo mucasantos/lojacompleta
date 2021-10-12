@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   void dispose() {
     // TODO: implement dispose
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen>
                               keyboardType: TextInputType.emailAddress,
                               autocorrect: false,
                               validator: (email) {
-                                if (!emailValid(email))
+                                if (!emailValid(email!))
                                   return "E-mail inválido";
                                 setState(() {
                                   user.email = email;
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen>
                               obscureText: true,
                               autocorrect: false,
                               validator: (senha) {
-                                if (senha.isEmpty || senha.length < 8) {
+                                if (senha!.isEmpty || senha.length < 8) {
                                   return "Senha inválida";
                                 }
 
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
                 StaggerAnimationButton(
                     user: user,
-                    controller: _animationController.view,
+                    controller: _animationController!, //era .view
                     formKey: formKey)
               ],
             ),

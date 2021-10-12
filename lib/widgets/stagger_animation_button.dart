@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 class StaggerAnimationButton extends StatelessWidget {
   final AnimationController controller;
-  final GlobalKey<FormState> formKey;
-  final User user;
-  StaggerAnimationButton({this.controller, this.formKey, this.user})
+  final GlobalKey<FormState>? formKey;
+  final User? user;
+  StaggerAnimationButton({required this.controller, this.formKey, this.user})
       : buttonSqueeze = Tween(begin: 320.0, end: 60.0).animate(
           CurvedAnimation(
             parent: controller,
@@ -29,13 +29,13 @@ class StaggerAnimationButton extends StatelessWidget {
 
   final Animation<double> buttonZoomOut;
 
-  Widget _buildAnimation(BuildContext context, Widget child) {
+  Widget _buildAnimation(BuildContext context, Widget? child) {
     return Padding(
         child: InkWell(
           onTap: () {
-            print(user.email);
-            if (!formKey.currentState.validate()) return;
-            controller.forward();
+            print(user!.email);
+            if (!formKey!.currentState!.validate()) return;
+            controller!.forward();
 
             context.read<UserManager>().signIn(
                 user: user,
@@ -44,7 +44,7 @@ class StaggerAnimationButton extends StatelessWidget {
                   Navigator.of(context).pushNamed("/base");
                 },
                 onFail: (message) {
-                  controller.reverse();
+                  controller!.reverse();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
                       message,

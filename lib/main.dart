@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojacompleta/models/cart_manager.dart';
+import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/product.model.dart';
 import 'package:lojacompleta/models/product_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
@@ -38,6 +39,10 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => ProductManager(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HomeManager(),
           lazy: false,
         ),
         ChangeNotifierProxyProvider<UserManager, CartManager>(

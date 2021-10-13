@@ -13,7 +13,7 @@ class HomeTop extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Container(
-      height: screenSize.height * 0.4,
+      height: screenSize.height * 0.1,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage("images/login_back.jpg"), fit: BoxFit.cover)),
@@ -21,17 +21,19 @@ class HomeTop extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          /*
           Container(
             alignment: Alignment.topCenter,
-            width: containerGrow.value * 120,
-            height: containerGrow.value * 120,
+            width: containerGrow.value * 150,
+            height: containerGrow.value * 150,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage("images/login.png"),
+                  image: AssetImage("images/shopping.gif"),
                   fit: BoxFit.cover,
                 )),
           ),
+          */
           Consumer<UserManager>(builder: (_, userManager, __) {
             if (userManager.user == null) return Container();
             return Text(

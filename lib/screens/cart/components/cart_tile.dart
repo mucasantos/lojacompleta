@@ -52,7 +52,7 @@ class CartTile extends StatelessWidget {
                             'R\$ ${cartProduct.unitPrice.toStringAsFixed(2)}',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).primaryColor),
+                                color: Colors.white),
                           );
                         else
                           return Text('Sem estoque suficiente',

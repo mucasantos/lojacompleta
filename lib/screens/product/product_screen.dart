@@ -81,7 +81,7 @@ class ProductScreen extends StatelessWidget {
                                 height: 44,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: primaryColor),
+                                      primary: Color(0xffCC667D)),
                                   onPressed: product.selectedSize != null
                                       ? () {
                                           if (userManager.isLoggedIn) {

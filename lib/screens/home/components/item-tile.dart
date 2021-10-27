@@ -23,13 +23,19 @@ class ItemTile extends StatelessWidget {
           }
         }
       },
-      child: AspectRatio(
-          aspectRatio: 1,
-          child: FadeInImage.memoryNetwork(
-            placeholder: kTransparentImage,
-            image: item.image,
-            fit: BoxFit.cover,
-          )),
+      child: Card(
+        elevation: 5,
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          child: AspectRatio(
+              aspectRatio: 1,
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: item.image,
+                fit: BoxFit.cover,
+              )),
+        ),
+      ),
     );
   }
 }

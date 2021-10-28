@@ -91,10 +91,19 @@ class UserManager extends ChangeNotifier {
           await firestore.collection('users').document(currentUser.uid).get();
 
       user = User.fromDocument(document: docUser);
-      print(user.name);
+
+      final docAdmin =
+          await firestore.collection('admins').document(user.id).get();
+
+      if (docAdmin.exists) {
+        user.admin = true;
+      }
+
       notifyListeners();
     }
   }
+
+  bool get userIsAdmin => user != null && user.admin;
 
   Future<void> signUp({User user, Function onFail, Function onSuccess}) async {
     loading = true;

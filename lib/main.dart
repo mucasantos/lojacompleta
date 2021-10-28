@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lojacompleta/models/admin_users_manager.dart';
 import 'package:lojacompleta/models/cart_manager.dart';
 import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/product.model.dart';
@@ -51,6 +52,11 @@ class _MyAppState extends State<MyApp> {
           update: (_, userManager, cartManager) =>
               cartManager..updateUser(userManager),
         ),
+        ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
+            create: (_) => AdminUsersManager(),
+            lazy: false,
+            update: (_, userManager, adminUsersManager) =>
+                adminUsersManager..updateUser(userManager)),
       ],
       child: MaterialApp(
         title: 'Loja do Samuca',

@@ -35,85 +35,111 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (_) => PageManager(pageController),
-      child: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          // HomeScreen(),
-          //LoginScreen(),
-          Scaffold(
-              backgroundColor: const Color(0xFF66CCB5),
-              drawer: CustomDrawer(),
-              // appBar: AppBar(
-              //   backgroundColor: const Color(0xFF66CCB5),
-              //   title: const Text('Loja do Samuca'),
-              // ),
-              body: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: const [
-                            Color.fromARGB(255, 30, 118, 130),
-                            Color.fromARGB(250, 253, 181, 168)
+        create: (_) => PageManager(pageController),
+        child: Consumer<UserManager>(
+          builder: (_, userManager, __) {
+            return PageView(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                // HomeScreen(),
+                //LoginScreen(),
+                Scaffold(
+                    backgroundColor: const Color(0xFF66CCB5),
+                    drawer: CustomDrawer(),
+                    // appBar: AppBar(
+                    //   backgroundColor: const Color(0xFF66CCB5),
+                    //   title: const Text('Loja do Samuca'),
+                    // ),
+                    body: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: const [
+                                  Color.fromARGB(255, 30, 118, 130),
+                                  Color.fromARGB(250, 253, 181, 168)
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter),
+                          ),
+                        ),
+                        CustomScrollView(
+                          slivers: [
+                            SliverAppBar(
+                              snap: true,
+                              floating: true,
+                              backgroundColor: Colors.transparent,
+                              flexibleSpace: const FlexibleSpaceBar(
+                                title: Text('Loja do Samuca'),
+                                centerTitle: true,
+                              ),
+                              actions: [
+                                IconButton(
+                                    onPressed: () => Navigator.of(context)
+                                        .pushNamed('/cart'),
+                                    icon: Icon(Icons.shopping_cart_outlined))
+                              ],
+                            ),
+                            Consumer<HomeManager>(
+                              builder: (_, homeManager, __) {
+                                final List<Widget> children =
+                                    homeManager.sections.map<Widget>((section) {
+                                  switch (section.type) {
+                                    case 'List':
+                                      return SectionList(section);
+                                    case 'Staggered':
+                                      return SectionStaggered(section);
+                                    default:
+                                      return Container();
+                                  }
+                                }).toList();
+
+                                return SliverList(
+                                  delegate: SliverChildListDelegate(children),
+                                );
+                              },
+                            )
                           ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter),
+                        ),
+                      ],
+                    )),
+
+                ProductsScreen(),
+                Scaffold(
+                  drawer: CustomDrawer(),
+                  appBar: AppBar(
+                    backgroundColor: const Color(0xFF66CCB5),
+                    title: const Text('Meus Pedidos'),
+                  ),
+                ),
+                Scaffold(
+                  drawer: CustomDrawer(),
+                  appBar: AppBar(
+                    backgroundColor: const Color(0xFF66CCB5),
+                    title: const Text('Lojas'),
+                  ),
+                ),
+                if (userManager.userIsAdmin) ...[
+                  Scaffold(
+                    drawer: CustomDrawer(),
+                    appBar: AppBar(
+                      backgroundColor: const Color(0xFF66CCB5),
+                      title: const Text('Usuários'),
                     ),
                   ),
-                  CustomScrollView(
-                    slivers: [
-                      SliverAppBar(
-                        snap: true,
-                        floating: true,
-                        backgroundColor: Colors.transparent,
-                        flexibleSpace: const FlexibleSpaceBar(
-                          title: Text('Loja do Samuca'),
-                          centerTitle: true,
-                        ),
-                        actions: [
-                          IconButton(
-                              onPressed: () =>
-                                  Navigator.of(context).pushNamed('/cart'),
-                              icon: Icon(Icons.shopping_cart_outlined))
-                        ],
-                      ),
-                      Consumer<HomeManager>(
-                        builder: (_, homeManager, __) {
-                          final List<Widget> children =
-                              homeManager.sections.map<Widget>((section) {
-                            switch (section.type) {
-                              case 'List':
-                                return SectionList(section);
-                              case 'Staggered':
-                                return SectionStaggered(section);
-                              default:
-                                return Container();
-                            }
-                          }).toList();
-
-                          return SliverList(
-                            delegate: SliverChildListDelegate(children),
-                          );
-                        },
-                      )
-                    ],
+                  Scaffold(
+                    drawer: CustomDrawer(),
+                    appBar: AppBar(
+                      backgroundColor: const Color(0xFF66CCB5),
+                      title: const Text('Lojas'),
+                    ),
                   ),
-                ],
-              )),
-
-          ProductsScreen(),
-          Scaffold(
-            drawer: CustomDrawer(),
-            appBar: AppBar(
-              backgroundColor: const Color(0xFF66CCB5),
-              title: const Text('Home4'),
-            ),
-          ),
-        ],
-      ),
-    );
+                ]
+              ],
+            );
+          },
+        ));
   }
 /*
   Future<bool> logEvent(String? eventName, Map? eventValues) {

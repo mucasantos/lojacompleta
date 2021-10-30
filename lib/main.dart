@@ -7,6 +7,7 @@ import 'package:lojacompleta/models/product_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/screens/base_screen.dart';
 import 'package:lojacompleta/screens/cart/cart_screen.dart';
+import 'package:lojacompleta/screens/edit_product/edit_product_screen.dart';
 import 'package:lojacompleta/screens/login/login_screen.dart';
 import 'package:lojacompleta/screens/product/product_screen.dart';
 import 'package:lojacompleta/screens/signup/signup_screen.dart';
@@ -90,6 +91,11 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartScreen());
+              break;
+            case '/edit':
+              return MaterialPageRoute(
+                  builder: (_) => EditProductScreen(
+                      product: settings.arguments as Product));
               break;
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());

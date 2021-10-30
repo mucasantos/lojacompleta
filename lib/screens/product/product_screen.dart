@@ -17,11 +17,22 @@ class ProductScreen extends StatelessWidget {
       value: product,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF66CCB5),
-          title: Text(
-            product.name,
-          ),
-        ),
+            backgroundColor: const Color(0xFF66CCB5),
+            title: Text(
+              product.name,
+            ),
+            actions: <Widget>[
+              Consumer<UserManager>(builder: (_, userManager, __) {
+                if (userManager.userIsAdmin)
+                  return IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/edit',
+                            arguments: product);
+                      },
+                      icon: Icon(Icons.edit));
+                return Container();
+              })
+            ]),
         backgroundColor: const Color(0xFF66CCB5),
         body: ListView(
           children: [
@@ -66,7 +77,7 @@ class ProductScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              product.sizes.first.price.toString(),
+                              product.basePrice.toStringAsFixed(2),
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,

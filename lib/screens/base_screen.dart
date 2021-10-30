@@ -4,6 +4,7 @@ import 'package:lojacompleta/helpers/constants.dart';
 import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/page_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
+import 'package:lojacompleta/screens/admin_users/admin_users_screens.dart';
 import 'package:lojacompleta/screens/home/components/section_list.dart';
 import 'package:lojacompleta/screens/home/components/section_staggered.dart';
 import 'package:lojacompleta/screens/home/homescreen.dart';
@@ -121,13 +122,7 @@ class _BaseScreenState extends State<BaseScreen> {
                   ),
                 ),
                 if (userManager.userIsAdmin) ...[
-                  Scaffold(
-                    drawer: CustomDrawer(),
-                    appBar: AppBar(
-                      backgroundColor: const Color(0xFF66CCB5),
-                      title: const Text('Usuários'),
-                    ),
-                  ),
+                  AdminUsersScreen(),
                   Scaffold(
                     drawer: CustomDrawer(),
                     appBar: AppBar(

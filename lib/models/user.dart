@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 
 class User {
   User({
@@ -7,6 +8,7 @@ class User {
     this.name,
     this.confirmPassword,
     this.id,
+    this.userImage,
   });
 
   User.fromDocument({DocumentSnapshot document}) {
@@ -20,6 +22,7 @@ class User {
   String password;
   String name;
   String confirmPassword;
+  String userImage;
   bool admin = false;
 
   DocumentReference get firestoreRef =>

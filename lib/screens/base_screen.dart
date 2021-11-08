@@ -4,6 +4,7 @@ import 'package:lojacompleta/helpers/constants.dart';
 import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/page_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
+import 'package:lojacompleta/models/video-questions-manager.dart';
 import 'package:lojacompleta/screens/admin_users/admin_users_screens.dart';
 import 'package:lojacompleta/screens/home/components/section_list.dart';
 import 'package:lojacompleta/screens/home/components/section_staggered.dart';
@@ -72,7 +73,7 @@ class _BaseScreenState extends State<BaseScreen> {
                               floating: true,
                               backgroundColor: Colors.transparent,
                               flexibleSpace: const FlexibleSpaceBar(
-                                title: Text('Loja do Samuca'),
+                                title: Text('Samuca\'s PetShop'),
                                 centerTitle: true,
                               ),
                               actions: [
@@ -91,6 +92,8 @@ class _BaseScreenState extends State<BaseScreen> {
                                       return SectionList(section);
                                     case 'Staggered':
                                       return SectionStaggered(section);
+                                    case 'more':
+                                      return SectionList(section);
                                     default:
                                       return Container();
                                   }
@@ -112,6 +115,18 @@ class _BaseScreenState extends State<BaseScreen> {
                   appBar: AppBar(
                     backgroundColor: const Color(0xFF66CCB5),
                     title: const Text('Meus Pedidos'),
+                  ),
+                  body: Container(
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              VideoQuestionsManager questionsManager =
+                                  VideoQuestionsManager();
+                            },
+                            child: Text('VideoQuestions')),
+                      ],
+                    ),
                   ),
                 ),
                 Scaffold(

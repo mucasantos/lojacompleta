@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
                 adminUsersManager..updateUser(userManager)),
       ],
       child: MaterialApp(
-        title: 'Loja do Samuca',
+        title: 'Samuca\'s PetShop',
         color: const Color(0xFF66CCB5),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

@@ -49,4 +49,10 @@ class ProductManager extends ChangeNotifier {
       return null;
     }
   }
+
+  void update(Product product) {
+    allProducts.removeWhere((element) => element.id == product.id);
+    allProducts.add(product);
+    notifyListeners();
+  }
 }

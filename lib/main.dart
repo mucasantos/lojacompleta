@@ -94,8 +94,8 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/edit':
               return MaterialPageRoute(
-                  builder: (_) => EditProductScreen(
-                      product: settings.arguments as Product));
+                  builder: (_) =>
+                      EditProductScreen(settings.arguments as Product));
               break;
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());

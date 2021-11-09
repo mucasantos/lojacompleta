@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojacompleta/models/product_manager.dart';
+import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/screens/products/components/product_list_tile.dart';
 import 'package:lojacompleta/screens/products/components/search_dialog.dart';
 import 'package:lojacompleta/widgets/custom_drawer/drawer.dart';
@@ -68,11 +69,18 @@ class ProductsScreen extends StatelessWidget {
                   ));
             }
           }),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.add,
-              ))
+          Consumer<UserManager>(builder: (_, userManager, __) {
+            if (userManager.userIsAdmin)
+              return IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/edit',
+                    );
+                  },
+                  icon: Icon(Icons.add));
+            return Container();
+          })
         ],
       ),
       body: Consumer<ProductManager>(builder: (_, productManager, __) {

@@ -89,7 +89,7 @@ class Product extends ChangeNotifier {
     loading = true;
     final Map<String, dynamic> data = {
       'name': name,
-      'decription': description,
+      'description': description,
       'sizes': exportSizetoList(),
     };
 

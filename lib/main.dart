@@ -10,6 +10,7 @@ import 'package:lojacompleta/screens/cart/cart_screen.dart';
 import 'package:lojacompleta/screens/edit_product/edit_product_screen.dart';
 import 'package:lojacompleta/screens/login/login_screen.dart';
 import 'package:lojacompleta/screens/product/product_screen.dart';
+import 'package:lojacompleta/screens/select_product_screen/select_product_screen.dart';
 import 'package:lojacompleta/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -91,6 +92,9 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartScreen());
+              break;
+            case '/select_product':
+              return MaterialPageRoute(builder: (_) => SelectProductScreen());
               break;
             case '/edit':
               return MaterialPageRoute(

@@ -6,6 +6,7 @@ import 'package:lojacompleta/models/page_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
 import 'package:lojacompleta/models/video-questions-manager.dart';
 import 'package:lojacompleta/screens/admin_users/admin_users_screens.dart';
+import 'package:lojacompleta/screens/home/components/addsection_widget.dart';
 import 'package:lojacompleta/screens/home/components/section_list.dart';
 import 'package:lojacompleta/screens/home/components/section_staggered.dart';
 import 'package:lojacompleta/screens/home/homescreen.dart';
@@ -80,11 +81,50 @@ class _BaseScreenState extends State<BaseScreen> {
                                 IconButton(
                                     onPressed: () => Navigator.of(context)
                                         .pushNamed('/cart'),
-                                    icon: Icon(Icons.shopping_cart_outlined))
+                                    icon: Icon(Icons.shopping_cart_outlined)),
+                                Consumer2<UserManager, HomeManager>(
+                                  builder: (_, userManager, homeManager, __) {
+                                    if (userManager.userIsAdmin &&
+                                        !userManager.loading) {
+                                      if (homeManager.editing) {
+                                        return PopupMenuButton(onSelected: (e) {
+                                          if (e == 'Salvar') {
+                                            homeManager.saveEditing();
+                                          } else {
+                                            homeManager.discardEditing();
+                                          }
+                                        }, itemBuilder: (_) {
+                                          return ['Salvar', 'Descartar']
+                                              .map((e) {
+                                            return PopupMenuItem(
+                                              child: Text(e),
+                                              value: e,
+                                            );
+                                          }).toList();
+                                        });
+                                      } else {
+                                        return IconButton(
+                                            onPressed: homeManager.enterEditing,
+                                            icon: Icon(Icons.edit));
+                                      }
+                                    } else
+                                      return Container();
+                                  },
+                                ),
                               ],
                             ),
                             Consumer<HomeManager>(
                               builder: (_, homeManager, __) {
+                                if (homeManager.loading) {
+                                  return SliverToBoxAdapter(
+                                    child: Center(
+                                      child: Image.asset(
+                                        "images/saving.gif",
+                                        scale: 4,
+                                      ),
+                                    ),
+                                  );
+                                }
                                 final List<Widget> children =
                                     homeManager.sections.map<Widget>((section) {
                                   switch (section.type) {
@@ -98,6 +138,10 @@ class _BaseScreenState extends State<BaseScreen> {
                                       return Container();
                                   }
                                 }).toList();
+                                if (homeManager.editing)
+                                  children.add(AddSection(
+                                    homeManager: homeManager,
+                                  ));
 
                                 return SliverList(
                                   delegate: SliverChildListDelegate(children),

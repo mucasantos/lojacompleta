@@ -45,9 +45,9 @@ class _LoginScreenState extends State<LoginScreen>
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
-                "images/login_back.jpg",
+                "images/pets.png",
               ),
-              fit: BoxFit.cover)),
+              fit: BoxFit.fitHeight)),
       child: Consumer<UserManager>(builder: (_, usermanager, __) {
         return ListView(
           padding: const EdgeInsets.all(0),
@@ -63,92 +63,100 @@ class _LoginScreenState extends State<LoginScreen>
                         top: 100,
                         bottom: 80,
                       ),
-                      child: Image.asset(
-                        "images/login.png",
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.contain,
-                      ),
+                      // child: Image.asset(
+                      //   "images/login.png",
+                      //   width: 150,
+                      //  height: 150,
+                      //  fit: BoxFit.contain,
+                      // ),
                     ),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                                border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.white24, width: 1),
-                            )),
-                            child: TextFormField(
-                              enabled: !usermanager.loading,
-                              style: TextStyle(color: Colors.white),
-                              decoration: const InputDecoration(
-                                hintText: 'E-mail',
-                                hintStyle: TextStyle(color: Colors.white),
-                                icon: Icon(
-                                  Icons.email,
-                                  color: Colors.white,
+                    SizedBox(
+                      height: 150,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(8),
+                      color: Color(0xFF66CCB5).withOpacity(0.54),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 20),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.white24, width: 1),
+                              )),
+                              child: TextFormField(
+                                enabled: !usermanager.loading,
+                                style: TextStyle(color: Colors.white),
+                                decoration: const InputDecoration(
+                                  hintText: 'E-mail',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  icon: Icon(
+                                    Icons.email,
+                                    color: Colors.white,
+                                  ),
+                                  border: InputBorder.none,
                                 ),
-                                border: InputBorder.none,
+                                keyboardType: TextInputType.emailAddress,
+                                autocorrect: false,
+                                validator: (email) {
+                                  if (!emailValid(email))
+                                    return "E-mail inválido";
+                                  setState(() {
+                                    user.email = email;
+                                  });
+
+                                  return null;
+                                },
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              autocorrect: false,
-                              validator: (email) {
-                                if (!emailValid(email))
-                                  return "E-mail inválido";
-                                setState(() {
-                                  user.email = email;
-                                });
-
-                                return null;
-                              },
                             ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                                border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.white24, width: 1),
-                            )),
-                            child: TextFormField(
-                              enabled: !usermanager.loading,
-                              style: TextStyle(color: Colors.white),
-                              decoration: const InputDecoration(
-                                hintText: 'Senha',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 20),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.white24, width: 1),
+                              )),
+                              child: TextFormField(
+                                enabled: !usermanager.loading,
+                                style: TextStyle(color: Colors.white),
+                                decoration: const InputDecoration(
+                                  hintText: 'Senha',
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  icon: Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                  ),
+                                  border: InputBorder.none,
                                 ),
-                                icon: Icon(
-                                  Icons.lock,
-                                  color: Colors.white,
-                                ),
-                                border: InputBorder.none,
+                                obscureText: true,
+                                autocorrect: false,
+                                validator: (senha) {
+                                  if (senha.isEmpty || senha.length < 8) {
+                                    return "Senha inválida";
+                                  }
+
+                                  setState(() {
+                                    user.password = senha;
+                                  });
+
+                                  return null;
+                                },
                               ),
-                              obscureText: true,
-                              autocorrect: false,
-                              validator: (senha) {
-                                if (senha.isEmpty || senha.length < 8) {
-                                  return "Senha inválida";
-                                }
-
-                                setState(() {
-                                  user.password = senha;
-                                });
-
-                                return null;
-                              },
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SignUpButton()

@@ -14,8 +14,8 @@ class SignUpButton extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
               letterSpacing: 0.5),
         ),
       ),

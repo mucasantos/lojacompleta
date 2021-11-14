@@ -47,6 +47,40 @@ class ProductScreen extends StatelessWidget {
                 dotSpacing: 15,
               ),
             ),
+            if (product.hasStock)
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                child: Consumer2<UserManager, Product>(
+                  builder: (_, userManager, product, __) {
+                    return SizedBox(
+                      height: 44,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xffCC667D)),
+                        onPressed: product.selectedSize != null
+                            ? () {
+                                if (userManager.isLoggedIn) {
+                                  context
+                                      .read<CartManager>()
+                                      .addToCart(product);
+                                  Navigator.of(context).pushNamed('/cart');
+                                } else {
+                                  Navigator.of(context).pushNamed('/login');
+                                }
+                              }
+                            : null,
+                        child: Text(
+                          userManager.isLoggedIn
+                              ? 'Adicionar ao carrinho'
+                              : 'Entre para comprar',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -85,38 +119,6 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        if (product.hasStock)
-                          Consumer2<UserManager, Product>(
-                            builder: (_, userManager, product, __) {
-                              return SizedBox(
-                                height: 44,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Color(0xffCC667D)),
-                                  onPressed: product.selectedSize != null
-                                      ? () {
-                                          if (userManager.isLoggedIn) {
-                                            context
-                                                .read<CartManager>()
-                                                .addToCart(product);
-                                            Navigator.of(context)
-                                                .pushNamed('/cart');
-                                          } else {
-                                            Navigator.of(context)
-                                                .pushNamed('/login');
-                                          }
-                                        }
-                                      : null,
-                                  child: Text(
-                                    userManager.isLoggedIn
-                                        ? 'Adicionar ao carrinho'
-                                        : 'Entre para comprar',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ),
-                              );
-                            },
-                          )
                       ],
                     ),
                     Padding(
@@ -131,7 +133,7 @@ class ProductScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      product.description,
+                      product.description ?? '',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

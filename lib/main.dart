@@ -5,6 +5,7 @@ import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/product.model.dart';
 import 'package:lojacompleta/models/product_manager.dart';
 import 'package:lojacompleta/models/user_manager.dart';
+import 'package:lojacompleta/screens/address/address_screen.dart';
 import 'package:lojacompleta/screens/base_screen.dart';
 import 'package:lojacompleta/screens/cart/cart_screen.dart';
 import 'package:lojacompleta/screens/edit_product/edit_product_screen.dart';
@@ -14,7 +15,7 @@ import 'package:lojacompleta/screens/select_product_screen/select_product_screen
 import 'package:lojacompleta/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+void main() {
   runApp(MyApp());
 }
 
@@ -92,6 +93,9 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartScreen());
+              break;
+            case '/address':
+              return MaterialPageRoute(builder: (_) => AddressScreen());
               break;
             case '/select_product':
               return MaterialPageRoute(builder: (_) => SelectProductScreen());

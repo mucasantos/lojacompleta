@@ -1,14 +1,19 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lojacompleta/models/address.dart';
 import 'package:lojacompleta/models/cart_product.dart';
 import 'package:lojacompleta/models/product.model.dart';
 import 'package:lojacompleta/models/user.dart';
 import 'package:lojacompleta/models/user_manager.dart';
+import 'package:lojacompleta/services/cepaberto_services.dart';
 
 class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
 
   User user;
+  Address address;
 
   num productsPrice = 0.0;
 
@@ -81,5 +86,36 @@ class CartManager extends ChangeNotifier {
       if (!cartProduct.hasStock) return false;
     }
     return true;
+  }
+
+  void getAddress(String cep) async {
+    final cepAbertoService = CepAbertoService();
+
+    try {
+      final cepAbertoAddress = await cepAbertoService.getAddressFromCep(cep);
+      log(
+        cepAbertoAddress.estado.sigla,
+      );
+      if (cepAbertoAddress != null) {
+        address = Address(
+          street: cepAbertoAddress.logradouro,
+          district: cepAbertoAddress.bairro,
+          zipCode: cepAbertoAddress.cep,
+          city: cepAbertoAddress.cidade.nome,
+          state: cepAbertoAddress.estado.sigla,
+          latitude: cepAbertoAddress.latitude,
+          longitude: cepAbertoAddress.longitude,
+        );
+
+        notifyListeners();
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  void removeAddress() {
+    address = null;
+    notifyListeners();
   }
 }

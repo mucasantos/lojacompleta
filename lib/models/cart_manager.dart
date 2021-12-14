@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lojacompleta/models/address.dart';
 import 'package:lojacompleta/models/cart_product.dart';
 import 'package:lojacompleta/models/product.model.dart';
@@ -16,6 +17,18 @@ class CartManager extends ChangeNotifier {
   Address address;
 
   num productsPrice = 0.0;
+  num deliveryPrice;
+
+  num get totalPrice => productsPrice + (deliveryPrice ?? 0);
+  bool _loading = false;
+
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
+  final Firestore firestore = Firestore.instance;
 
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -88,7 +101,10 @@ class CartManager extends ChangeNotifier {
     return true;
   }
 
-  void getAddress(String cep) async {
+  bool get isAddressValid => address != null && deliveryPrice != null;
+
+  Future<void> getAddress(String cep) async {
+    loading = true;
     final cepAbertoService = CepAbertoService();
 
     try {
@@ -107,15 +123,53 @@ class CartManager extends ChangeNotifier {
           longitude: cepAbertoAddress.longitude,
         );
 
-        notifyListeners();
+        //  notifyListeners();
+        loading = false;
       }
     } catch (e) {
-      log(e.toString());
+      loading = false;
+      return Future.error('CEP não encontrado!');
     }
+    loading = false;
   }
 
   void removeAddress() {
     address = null;
+    deliveryPrice = null;
     notifyListeners();
+  }
+
+  Future<void> setAddress(Address address) async {
+    loading = true;
+    this.address = address;
+    if (await calculateDelivery(address.latitude, address.longitude)) {
+      loading = false;
+    } else {
+      loading = false;
+      return Future.error("Fora do raio de entrega");
+    }
+  }
+
+  Future<bool> calculateDelivery(double lat, double long) async {
+    final DocumentSnapshot doc = await firestore.document('aux/delivery').get();
+
+    final latStore = doc.data['lat'] as double;
+    final longStore = doc.data['long'] as double;
+    final maxKm = doc.data['maxKm'] as num;
+
+    final perKm = doc.data['perKm'] as num;
+    final priceBase = doc.data['priceBase'] as num;
+
+    double distance =
+        await Geolocator().distanceBetween(latStore, longStore, lat, long);
+
+    distance /= 1000.0;
+
+    deliveryPrice = priceBase + distance * perKm;
+
+    if (distance > maxKm) {
+      return false;
+    }
+    return true;
   }
 }

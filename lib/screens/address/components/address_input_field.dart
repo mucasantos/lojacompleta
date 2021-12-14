@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojacompleta/models/address.dart';
+import 'package:lojacompleta/models/cart_manager.dart';
+import 'package:provider/src/provider.dart';
 
 class AddressInputField extends StatelessWidget {
   const AddressInputField({Key key, this.address}) : super(key: key);
@@ -8,6 +10,7 @@ class AddressInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartManager = context.watch<CartManager>();
     String emptyValidator(String text) =>
         text.isEmpty ? 'Campo obrigatório' : null;
     return Column(
@@ -97,11 +100,32 @@ class AddressInputField extends StatelessWidget {
             ),
           ],
         ),
+        Visibility(
+            visible: cartManager.loading,
+            child: LinearProgressIndicator(
+              color: Color(0xffCC667D),
+              backgroundColor: Colors.transparent,
+            )),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
               primary: Color(0xffCC667D),
               onSurface: Color(0xffCC667D).withAlpha(50)),
-          onPressed: () {},
+          onPressed: () async {
+            if (Form.of(context).validate()) {
+              Form.of(context).save();
+              try {
+                await context.read<CartManager>().setAddress(address);
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(
+                    '$e',
+                    textAlign: TextAlign.center,
+                  ),
+                  backgroundColor: Colors.red,
+                ));
+              }
+            }
+          },
           child: Text('Calcular Frete'),
         )
       ],

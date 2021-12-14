@@ -35,11 +35,21 @@ class AddressCard extends StatelessWidget {
                       address: address,
                     ),
                     Visibility(
-                      visible: address.zipCode != null,
+                      visible: address.zipCode != null &&
+                          cartManager.deliveryPrice == null,
                       child: AddressInputField(
                         address: address,
                       ),
-                    )
+                    ),
+                    Visibility(
+                        visible: address.zipCode != null &&
+                            cartManager.deliveryPrice != null,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Text(
+                              '${address.street}, ${address.number}\n${address.district}\n'
+                              '${address.city} - ${address.state}'),
+                        ))
                   ],
                 ),
               );

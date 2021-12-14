@@ -7,16 +7,22 @@ class PriceCard extends StatelessWidget {
     Key key,
     this.buttonText,
     this.onPressed,
+    this.color,
   }) : super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     final cartManager = context.watch<CartManager>();
+    final deliveryPrice = cartManager.deliveryPrice;
+    final productsPrice = cartManager.productsPrice;
+    final totalPrice = cartManager.totalPrice;
+
     return Card(
-      color: const Color(0xFF66CCB5),
+      color: color ?? Color(0xFF66CCB5),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
@@ -37,12 +43,24 @@ class PriceCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Subtotal'),
-                Text(cartManager.productsPrice.toStringAsFixed(2)),
+                Text('R\$ ${productsPrice.toStringAsFixed(2)}'),
               ],
             ),
             const Divider(
               thickness: 2.0,
             ),
+            if (deliveryPrice != null) ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Entrega'),
+                  Text('R\$ ${deliveryPrice.toStringAsFixed(2)}'),
+                ],
+              ),
+              const Divider(
+                thickness: 2.0,
+              ),
+            ],
             const SizedBox(
               height: 12,
             ),
@@ -57,7 +75,7 @@ class PriceCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  cartManager.productsPrice.toStringAsFixed(2),
+                  'R\$ ${totalPrice.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

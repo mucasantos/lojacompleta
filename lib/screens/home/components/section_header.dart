@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+
 import 'package:lojacompleta/models/home_manager.dart';
 import 'package:lojacompleta/models/section.dart';
 import 'package:lojacompleta/widgets/custom_item_button.dart';
-import 'package:provider/src/provider.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader(this.section);
